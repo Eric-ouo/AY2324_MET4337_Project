@@ -27,6 +27,11 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            animator.SetTrigger("kick");
+        }
+
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             isJumping = true;
@@ -68,13 +73,6 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f);
     }
 
-    public void KickAnimation()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            animator.SetTrigger("kick");
-        }
-    }
     private void Reflect(float direction)
     {
         Vector3 scale = transform.localScale;
