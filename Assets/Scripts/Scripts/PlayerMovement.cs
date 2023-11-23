@@ -27,12 +27,26 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
 
-        if (isGrounded && Input.GetButtonDown("Jump"))
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             isJumping = true;
         }
 
-        horizontalMove = Input.GetAxis("Horizontal") * speed;
+        if (Input.GetKey(KeyCode.A))
+        {
+            horizontalMove = -speed;
+            Reflect(1f);
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            horizontalMove = speed;
+            Reflect(-1f);
+        }
+        else
+        {
+            horizontalMove = 0;
+        }
+
         animator.SetBool("run", Mathf.Abs(horizontalMove) > 0f);
         animator.SetBool("Jump", isJumping);
     }
@@ -58,7 +72,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            animator.SetTrigger("kick"); ;
+            animator.SetTrigger("kick");
         }
+    }
+    private void Reflect(float direction)
+    {
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * direction;
+        transform.localScale = scale;
     }
 }
