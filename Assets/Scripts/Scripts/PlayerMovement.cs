@@ -15,10 +15,12 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded = false;
     private Rigidbody2D rb;
     private Vector3 velocity = Vector3.zero;
+    private Animator animator;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -31,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         horizontalMove = Input.GetAxis("Horizontal") * speed;
+        animator.SetBool("run", Mathf.Abs(horizontalMove) > 0f);
+        animator.SetBool("Jump", isJumping);
     }
 
     private void FixedUpdate()
@@ -48,5 +52,13 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 targetVelocity = new Vector2(horizontalMove, rb.velocity.y);
         rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f);
+    }
+
+    public void KickAnimation()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            animator.SetTrigger("kick"); ;
+        }
     }
 }
