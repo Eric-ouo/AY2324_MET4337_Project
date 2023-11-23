@@ -35,10 +35,12 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             horizontalMove = -speed;
+            Reflect(1f);
         }
         else if (Input.GetKey(KeyCode.D))
         {
             horizontalMove = speed;
+            Reflect(-1f);
         }
         else
         {
@@ -72,5 +74,11 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetTrigger("kick");
         }
+    }
+    private void Reflect(float direction)
+    {
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * direction;
+        transform.localScale = scale;
     }
 }
