@@ -37,5 +37,21 @@ public class selection : MonoBehaviour
 	public void chooseMap(int i)
 	{
 		map = i;
+		playerSerrings.characterSelect = character;
+		playerSerrings.mapSelect = map;
+		
+		
+		switch (playerSerrings.mapSelect)
+		{
+			case 0:
+				SceneManager.LoadScene(2);
+				break;
+			case 1:
+				SceneManager.LoadScene(3);
+				break;
+			default:
+				Debug.Log("map select error");
+				break;
+		}
 	}
 }

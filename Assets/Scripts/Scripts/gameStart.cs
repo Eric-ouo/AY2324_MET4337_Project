@@ -20,6 +20,7 @@ public class gameStart : MonoBehaviour
 	void Update()
 	{
 		soundValue = (int)slider.value;
+		playerSerrings.soundValue = soundValue;
 	}
 	
 	public void start_game()
