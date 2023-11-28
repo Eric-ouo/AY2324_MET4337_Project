@@ -17,4 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Court.unity
     guid: 7b0d16435afcaf545ae430c4b9a81603
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 8f337c7af74feb448893db84f2b9354c,
+      type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
+      guid: d3d7007b6a897a34b959626cdc46646f, type: 2}
