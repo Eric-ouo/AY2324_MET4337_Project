@@ -47,6 +47,11 @@ public class PlayerMovement : MonoBehaviour
             horizontalMove = 0;
         }
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            animator.SetTrigger("kick");
+        }
+
         animator.SetBool("run", Mathf.Abs(horizontalMove) > 0f);
         animator.SetBool("Jump", isJumping);
     }
@@ -68,13 +73,6 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f);
     }
 
-    public void KickAnimation()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            animator.SetTrigger("kick");
-        }
-    }
     private void Reflect(float direction)
     {
         Vector3 scale = transform.localScale;
