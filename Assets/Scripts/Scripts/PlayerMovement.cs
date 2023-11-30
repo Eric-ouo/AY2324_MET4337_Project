@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 10f;
@@ -13,9 +14,14 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalMove;
     private bool isJumping = false;
     private bool isGrounded = false;
+    private bool hasJumped = false; // new varbiable
     private Rigidbody2D rb;
     private Vector3 velocity = Vector3.zero;
     private Animator animator;
+
+    public LayerMask ballLayer; // used to detect the ball layermask
+    public float kickRadius; // where the kick will be detected
+    public float kickForce; // force of the kick
 
     private void Start()
     {
@@ -27,9 +33,15 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
 
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+        if (isGrounded)
+        {
+            hasJumped = false; // character is grounded, allow to jump
+        }
+
+        if (!hasJumped && isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             isJumping = true;
+            hasJumped = true; // after jump, set to true, not allow to jump again
         }
 
         if (Input.GetKey(KeyCode.A))
@@ -47,13 +59,28 @@ public class PlayerMovement : MonoBehaviour
             horizontalMove = 0;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKey(KeyCode.J))
         {
             animator.SetTrigger("kick");
         }
 
         animator.SetBool("run", Mathf.Abs(horizontalMove) > 0f);
         animator.SetBool("Jump", isJumping);
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            // check if the ball is in range
+            Collider2D ball = Physics2D.OverlapCircle(transform.position, kickRadius, ballLayer);
+            if (ball != null)
+            {
+                // calculate the direction of the kick
+                Vector2 kickDirection = ball.transform.position - transform.position;
+                kickDirection.Normalize();
+
+                // to kick the ball, we need to add force to the ball
+                ball.GetComponent<Rigidbody2D>().AddForce(kickDirection * kickForce, ForceMode2D.Impulse);
+            }
+        }
     }
 
     private void FixedUpdate()
