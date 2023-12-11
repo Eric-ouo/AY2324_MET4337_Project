@@ -9,7 +9,11 @@ TagManager:
   - Bullet
   - Ground
   - Pickup
+<<<<<<< HEAD
   - goal
+=======
+  - ball
+>>>>>>> game_ui
   layers:
   - Default
   - TransparentFX
