@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     public float kickRadius; // where the kick will be detected
     public float kickForce; // force of the kick
 
+    //public AudioManager audioManager;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -79,6 +81,8 @@ public class PlayerMovement : MonoBehaviour
 
                 // to kick the ball, we need to add force to the ball
                 ball.GetComponent<Rigidbody2D>().AddForce(kickDirection * kickForce, ForceMode2D.Impulse);
+
+                //audioManager.PlayKickGround();
             }
         }
     }
