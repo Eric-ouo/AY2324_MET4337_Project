@@ -31,15 +31,15 @@ public class gameStart : MonoBehaviour
 	public void entry_settings()
 	{
 		anim.SetBool("settings", true);
-	}
+    }
 	
 	public void exit_settings()
 	{
 		anim.SetBool("settings", false);
-	}
+    }
 	
 	public void quit()
 	{
 		Application.Quit();
-	}
+    }
 }
