@@ -15,10 +15,10 @@ public class PlayerMovement : MonoBehaviour
     private bool isJumping = false;
     private bool isGrounded = false;
     private bool hasJumped = false; // new varbiable
-	public bool leftButton;
-	public bool rightButton;
-	public bool jumpButton;
-	public bool kickButton;
+	private bool leftButton;
+	private bool rightButton;
+	private bool jumpButton;
+	private bool kickButton;
     private Rigidbody2D rb;
     private Vector3 velocity = Vector3.zero;
     private Animator animator;
@@ -44,18 +44,18 @@ public class PlayerMovement : MonoBehaviour
             hasJumped = false; // character is grounded, allow to jump
         }
 
-        if (!hasJumped && isGrounded && Input.GetKeyDown(KeyCode.Space))
+        if (!hasJumped && isGrounded && (Input.GetKeyDown(KeyCode.Space) || jumpButton))
         {
             isJumping = true;
             hasJumped = true; // after jump, set to true, not allow to jump again
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) || leftButton)
         {
             horizontalMove = -speed;
             Reflect(1f);
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) || rightButton)
         {
             horizontalMove = speed;
             Reflect(-1f);
@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
             horizontalMove = 0;
         }
 
-        if (Input.GetKey(KeyCode.J))
+        if (Input.GetKey(KeyCode.J) || kickButton)
         {
             animator.SetTrigger("kick");
         }
@@ -73,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("run", Mathf.Abs(horizontalMove) > 0f);
         animator.SetBool("Jump", isJumping);
 
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.J) || kickButton)
         {
             // check if the ball is in range
             Collider2D ball = Physics2D.OverlapCircle(transform.position, kickRadius, ballLayer);
