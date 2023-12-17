@@ -150,7 +150,7 @@ Transform:
   m_Children:
   - {fileID: 8558133043860573087}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5904710518483332418
 GameObject:
@@ -280,10 +280,10 @@ MonoBehaviour:
   checkRadius: 0
   groundLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   ballLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   kickRadius: 1.5
   kickForce: 10
 --- !u!61 &3793534278158344982
