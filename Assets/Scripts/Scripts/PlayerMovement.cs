@@ -15,6 +15,10 @@ public class PlayerMovement : MonoBehaviour
     private bool isJumping = false;
     private bool isGrounded = false;
     private bool hasJumped = false; // new varbiable
+	public bool leftButton;
+	public bool rightButton;
+	public bool jumpButton;
+	public bool kickButton;
     private Rigidbody2D rb;
     private Vector3 velocity = Vector3.zero;
     private Animator animator;
@@ -110,4 +114,21 @@ public class PlayerMovement : MonoBehaviour
         scale.x = Mathf.Abs(scale.x) * direction;
         transform.localScale = scale;
     }
+	
+	public void leftButtonCheck(bool press)
+	{
+		leftButton = press;
+	}
+	public void rightButtonCheck(bool press)
+	{
+		rightButton = press;
+	}
+	public void jumpButtonCheck(bool press)
+	{
+		jumpButton = press;
+	}
+	public void kickButtonCheck(bool press)
+	{
+		kickButton = press;
+	}
 }
