@@ -115,6 +115,11 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale = scale;
     }
 	
+	public void pause(float scale)
+	{
+		Time.timeScale = scale;
+	}
+	
 	public void leftButtonCheck(bool press)
 	{
 		leftButton = press;
