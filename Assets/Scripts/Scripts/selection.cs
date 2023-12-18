@@ -10,7 +10,8 @@ public class selection : MonoBehaviour
 	
 	[SerializeField] private int character;
 	[SerializeField] private int map;
-    AudioManager audioManager = AudioManager.instance;
+	
+	[SerializeField] private AudioManager audioManager;
 
     void Start()
 	{
@@ -20,7 +21,6 @@ public class selection : MonoBehaviour
 	public void back()
 	{
 		audioManager.PlayButtonClick();
-
         if (anim.GetBool("map"))
 		{
 			anim.SetBool("map", false);
