@@ -16,6 +16,7 @@ public class selection : MonoBehaviour
     void Start()
 	{
 		anim = canvas.GetComponent<Animator>();
+		audioManager = AudioManager.instance;
 	}
 	
 	public void back()

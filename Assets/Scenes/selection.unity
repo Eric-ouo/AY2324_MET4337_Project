@@ -411,6 +411,8 @@ MonoBehaviour:
   Grass: {fileID: 0}
   ButtonClick: {fileID: 8300000, guid: 0e78333318be51142ae7bcad08fa5a2d, type: 3}
   win: {fileID: 0}
+  run: {fileID: 0}
+  isRun: 0
   backgroundMusicSource: {fileID: 0}
   soundEffectsSource: {fileID: 0}
 --- !u!82 &301227419

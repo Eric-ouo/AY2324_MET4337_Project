@@ -11,11 +11,13 @@ public class gameStart : MonoBehaviour
 	
 	[SerializeField] private Slider slider;
 	[SerializeField] private int soundValue;
-	public AudioManager audioManager;
+	
+	[SerializeField] private AudioManager audioManager;
 	
 	void Start()
 	{
 		anim = canvas.GetComponent<Animator>();
+		audioManager = AudioManager.instance;
 	}
 	
 	void Update()
