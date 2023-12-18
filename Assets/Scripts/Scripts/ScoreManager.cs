@@ -4,21 +4,15 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    // Static variable for the score, accessible from other scripts without a reference.
-    public static int score = 0;
+    public int leftscore = 0;
+    public int rightscore = 0;
 
-    // Static method to add points to the score. Can be called from any other script.
-    public static void AddScore(int value)
+    public void IncreaseRightScore()
     {
-        score += value;
-        // Optional: Print the new score to the console for debugging.
-        Debug.Log("Score added! Current score: " + score);
+        rightscore++;
     }
-
-    // Awake is called when the script instance is being loaded.
-    void Awake()
+    public void IncreaseLeftScore()
     {
-        // Reset score to zero when the game starts/restarts.
-        score = 0;
+        leftscore++;
     }
 }
