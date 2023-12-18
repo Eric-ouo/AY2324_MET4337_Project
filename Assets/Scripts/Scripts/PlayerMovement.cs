@@ -23,12 +23,37 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask ballLayer; 
     public float kickRadius; 
     public float kickForce;
+	
+	[SerializeField] private Button leftB;
+	[SerializeField] private Button rightB;
+	[SerializeField] private Button kickB;
+	[SerializeField] private Button jumpB;
+	private bool leftButton;
+	private bool rightButton;
+	private bool kickButton;
+	private bool jumpButton;
+	
+	[SerializeField] private AudioManager audioManager;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 		groundCheck = GameObject.Find("GroundBlock").transform;
+		
+		leftB = GameObject.Find("left button").GetComponent<Button>();
+		rightB = GameObject.Find("right button").GetComponent<Button>();
+		kickB = GameObject.Find("kick").GetComponent<Button>();
+		jumpB = GameObject.Find("jump").GetComponent<Button>();
+		
+		/*
+		leftB.OnClick.AddListener(leftClickButton);
+		rightB.OnClick.AddListener(rightClickButton);
+		kickB.OnClick.AddListener(kickClickButton);
+		jumpB.OnClick.AddListener(jumpClickButton);
+		*/
+		
+		audioManager = AudioManager.instance;
     }
 
     private void Update()
@@ -40,20 +65,20 @@ public class PlayerMovement : MonoBehaviour
                 hasJumped = false; // character is grounded, allow to jump
             }
 
-        if (!hasJumped && isGrounded && (Input.GetKeyDown(KeyCode.Space)))
+        if (!hasJumped && isGrounded && (Input.GetKeyDown(KeyCode.Space) || jumpButton))
         {
             isJumping = true;
             hasJumped = true;
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) || leftButton)
         {
             horizontalMove = -speed;
             Reflect(1f);
             AudioManager.instance.isRun = true;
             AudioManager.instance.audioPlay();
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) || rightButton)
         {
             horizontalMove = speed;
             Reflect(-1f);
@@ -67,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
             AudioManager.instance.audioPlay();
         }
 
-        if (Input.GetKey(KeyCode.J))
+        if (Input.GetKey(KeyCode.J) || kickButton)
         {
             AudioManager.instance.PlayKickSound();
             animator.SetTrigger("kick");
@@ -76,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("run", Mathf.Abs(horizontalMove) > 0f);
         animator.SetBool("Jump", isJumping);
 
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.J) || kickButton)
         {
             // check if the ball is in range
             Collider2D ball = Physics2D.OverlapCircle(transform.position, kickRadius, ballLayer);
