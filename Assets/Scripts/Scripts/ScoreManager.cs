@@ -5,25 +5,23 @@ public class ScoreManager : MonoBehaviour
     public int leftScore = 0;
     public int rightScore = 0;
 
-    // References to the player GameObjects
     public GameObject leftPlayer;
     public GameObject rightPlayer;
 
-    // Reference to the ball GameObject
     [SerializeField] private GameObject ball;
 
-    // Private variables to store the new start positions
+
     private Vector3 leftPlayerNewStartPosition = new Vector3(-6.63000011f, 4.23999977f, 0.0444346517f);
     private Vector3 rightPlayerNewStartPosition = new Vector3(3.52999997f, 4.3499999f, 0.0444346517f);
 
     private void Start()
     {
+
         if (ball == null)
         {
             Debug.LogError("Ball is not set in the inspector!");
         }
 
-        // Reset players and ball to their start positions
         ResetMatch();
     }
 
@@ -47,7 +45,7 @@ public class ScoreManager : MonoBehaviour
 
     private void ResetPlayers()
     {
-        // Reset and move the left player
+
         if (leftPlayer != null)
         {
             leftPlayer.transform.position = Vector3.zero; // Reset position to zero first
@@ -59,7 +57,7 @@ public class ScoreManager : MonoBehaviour
             Debug.LogError("Left player is not found in the scene.");
         }
 
-        // Reset and move the right player
+
         if (rightPlayer != null)
         {
             rightPlayer.transform.position = Vector3.zero; // Reset position to zero first
@@ -82,7 +80,7 @@ public class ScoreManager : MonoBehaviour
             Rigidbody2D ballRigidbody = ball.GetComponent<Rigidbody2D>();
             if (ballRigidbody != null)
             {
-   
+
                 ballRigidbody.velocity = Vector2.zero;
                 ballRigidbody.angularVelocity = 0;
 

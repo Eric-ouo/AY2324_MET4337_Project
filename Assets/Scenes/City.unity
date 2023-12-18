@@ -2418,6 +2418,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1964256823}
     m_Modifications:
+    - target: {fileID: 2056533055042992852, guid: b2acb355755005347aa831ea3970266b,
+        type: 3}
+      propertyPath: groundCheck
+      value: 
+      objectReference: {fileID: 700153875}
     - target: {fileID: 2776216599954634804, guid: b2acb355755005347aa831ea3970266b,
         type: 3}
       propertyPath: m_RootOrder
@@ -3196,6 +3201,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6269028890547969693, guid: 1895834f2588b8f4e88149013d5822c6,
+        type: 3}
+      propertyPath: groundCheck
+      value: 
+      objectReference: {fileID: 700153875}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4371,6 +4381,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1025173523847589635, guid: 872977c347ff593449dd7cb739d85241,
+        type: 3}
+      propertyPath: groundCheck
+      value: 
+      objectReference: {fileID: 700153875}
     - target: {fileID: 3697109234059869015, guid: 872977c347ff593449dd7cb739d85241,
         type: 3}
       propertyPath: m_RootOrder

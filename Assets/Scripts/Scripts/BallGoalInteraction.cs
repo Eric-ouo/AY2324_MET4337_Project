@@ -26,13 +26,11 @@ public class BallGoalInteraction : MonoBehaviour
             if (transform.position.x < 0f)
             {
                 Debug.Log("right");
-                AudioManager.instance.PlayWin();
                 scoreManager.IncreaseRightScore();
             }
             else if (transform.position.x > 0f)
             {
                 Debug.Log("Left");
-                AudioManager.instance.PlayWin();
                 scoreManager.IncreaseLeftScore();
             }
         }
