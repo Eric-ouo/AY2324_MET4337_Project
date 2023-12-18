@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,15 +11,17 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalMove;
     private bool isJumping = false;
     private bool isGrounded = false;
-    private bool hasJumped = false; // new varbiable
-	private bool leftButton;
-	private bool rightButton;
-	private bool jumpButton;
-	private bool kickButton;
+    private bool hasJumped = false;
     private Rigidbody2D rb;
     private Vector3 velocity = Vector3.zero;
     private Animator animator;
-    public AudioSource audioSource;
+    private AudioSource audioSource;
+
+    private bool leftButton;
+    private bool rightButton;
+    private bool jumpButton;
+    private bool kickButton;
+
 
     public LayerMask ballLayer; // used to detect the ball layermask
     public float kickRadius; // where the kick will be detected
@@ -35,122 +34,145 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+
+        // Ensure the AudioManager is found
+        if (AudioManager.instance != null)
+        {
+            audioManager = AudioManager.instance;
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager not found in the scene.");
+        }
     }
 
     private void Update()
     {
+        // Check if the player is grounded
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
 
+        // Reset jumping ability when grounded
         if (isGrounded)
         {
-            hasJumped = false; // character is grounded, allow to jump
+            hasJumped = false;
         }
 
-        if (!hasJumped && isGrounded && (Input.GetKeyDown(KeyCode.Space) || jumpButton))
+        // Jump if the jump button is pressed and the player is grounded
+        if (!hasJumped && isGrounded && jumpButton)
         {
             isJumping = true;
-            hasJumped = true; // after jump, set to true, not allow to jump again
+            hasJumped = true;
         }
 
-        if (Input.GetKey(KeyCode.A) || leftButton)
+        // Move left
+        if (leftButton)
         {
             horizontalMove = -speed;
-            Reflect(1f);
+            ReflectCharacter(true);
         }
-        else if (Input.GetKey(KeyCode.D) || rightButton)
+        // Move right
+        else if (rightButton)
         {
             horizontalMove = speed;
-            Reflect(-1f);
+            ReflectCharacter(false);
         }
+        // No horizontal movement
         else
         {
             horizontalMove = 0;
         }
-        audioSource.volume = 1f;
-        audioPlay();
 
-        if (Input.GetKey(KeyCode.J) || kickButton)
+        // Play running sound if moving, otherwise stop
+        audioSource.volume = Mathf.Abs(horizontalMove) > 0 ? 1f : 0f;
+        AudioPlay();
+
+        // Kick if the kick button is pressed
+        if (kickButton)
         {
-            animator.SetTrigger("kick");
+            PerformKick();
         }
 
-        animator.SetBool("run", Mathf.Abs(horizontalMove) > 0f);
+        // Update animator states
+        animator.SetBool("run", horizontalMove != 0);
         animator.SetBool("Jump", isJumping);
-
-        if (Input.GetKeyDown(KeyCode.J) || kickButton)
-        {
-            // check if the ball is in range
-            Collider2D ball = Physics2D.OverlapCircle(transform.position, kickRadius, ballLayer);
-            if (ball != null)
-            {
-                audioManager.PlayKickSound();
-                // calculate the direction of the kick
-                Vector2 kickDirection = ball.transform.position - transform.position;
-                kickDirection.Normalize();
-
-                // to kick the ball, we need to add force to the ball
-                ball.GetComponent<Rigidbody2D>().AddForce(kickDirection * kickForce, ForceMode2D.Impulse);
-            }
-        }
     }
 
     private void FixedUpdate()
     {
+        // Apply movement and jumping forces
         MovePlayer(horizontalMove);
-
         if (isJumping)
         {
-            rb.AddForce(new Vector2(0f, jumpForce));
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isJumping = false;
         }
     }
 
-    void MovePlayer(float horizontalMove)
+    private void MovePlayer(float horizontalMove)
     {
+        // Handle player movement
         Vector3 targetVelocity = new Vector2(horizontalMove, rb.velocity.y);
         rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f);
     }
 
-    private void Reflect(float direction)
+    private void ReflectCharacter(bool isLeft)
     {
+        // Reflect the character sprite based on movement direction
         Vector3 scale = transform.localScale;
-        scale.x = Mathf.Abs(scale.x) * direction;
+        scale.x = Mathf.Abs(scale.x) * (isLeft ? -1 : 1);
         transform.localScale = scale;
     }
-	
-	public void pause(float scale)
-	{
-		Time.timeScale = scale;
-	}
-	
-	public void leftButtonCheck(bool press)
-	{
-		leftButton = press;
-	}
-	public void rightButtonCheck(bool press)
-	{
-		rightButton = press;
-	}
-	public void jumpButtonCheck(bool press)
-	{
-		jumpButton = press;
-	}
-	public void kickButtonCheck(bool press)
-	{
-		kickButton = press;
-	}
-    void audioPlay()
+
+    public void SetLeftButton(bool press)
     {
-        if (Mathf.Abs(horizontalMove) > 0f)
+        leftButton = press;
+    }
+
+    public void SetRightButton(bool press)
+    {
+        rightButton = press;
+    }
+
+    public void SetJumpButton(bool press)
+    {
+        jumpButton = press;
+    }
+
+    public void SetKickButton(bool press)
+    {
+        kickButton = press;
+    }
+
+    private void PerformKick()
+    {
+        // Perform kick action
+        animator.SetTrigger("kick");
+        Collider2D ball = Physics2D.OverlapCircle(transform.position, kickRadius, ballLayer);
+        if (ball != null)
         {
-            if (!audioSource.isPlaying)
-            {
-                audioSource.Play();
-            }
+            audioManager.PlayKickSound();
+            Vector2 kickDirection = ball.transform.position - transform.position;
+            kickDirection.Normalize();
+            ball.GetComponent<Rigidbody2D>().AddForce(kickDirection * kickForce, ForceMode2D.Impulse);
         }
-        else
+    }
+
+    private void AudioPlay()
+    {
+        // Handle playing of the running sound
+        if (Mathf.Abs(horizontalMove) > 0 && !audioSource.isPlaying)
+        {
+            audioSource.Play();
+        }
+        else if (horizontalMove == 0)
         {
             audioSource.Stop();
         }
+    }
+
+    // Public methods to be called by UI button events
+    public void OnLeftButtonPress(bool isPressed)
+    {
+        SetLeftButton(isPressed);
     }
 }
