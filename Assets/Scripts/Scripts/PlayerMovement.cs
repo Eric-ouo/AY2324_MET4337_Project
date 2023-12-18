@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 
 public class PlayerMovement : MonoBehaviour
@@ -24,10 +25,6 @@ public class PlayerMovement : MonoBehaviour
     public float kickRadius; 
     public float kickForce;
 	
-	[SerializeField] private Button leftB;
-	[SerializeField] private Button rightB;
-	[SerializeField] private Button kickB;
-	[SerializeField] private Button jumpB;
 	private bool leftButton;
 	private bool rightButton;
 	private bool kickButton;
@@ -40,18 +37,6 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 		groundCheck = GameObject.Find("GroundBlock").transform;
-		
-		leftB = GameObject.Find("left button").GetComponent<Button>();
-		rightB = GameObject.Find("right button").GetComponent<Button>();
-		kickB = GameObject.Find("kick").GetComponent<Button>();
-		jumpB = GameObject.Find("jump").GetComponent<Button>();
-		
-		/*
-		leftB.OnClick.AddListener(leftClickButton);
-		rightB.OnClick.AddListener(rightClickButton);
-		kickB.OnClick.AddListener(kickClickButton);
-		jumpB.OnClick.AddListener(jumpClickButton);
-		*/
 		
 		audioManager = AudioManager.instance;
     }
@@ -139,5 +124,25 @@ public class PlayerMovement : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.x = Mathf.Abs(scale.x) * direction;
         transform.localScale = scale;
+    }
+	
+	public void leftButtonClick(bool click)
+    {
+		leftButton = click;
+    }
+	
+	public void rightButtonClick(bool click)
+    {
+		rightButton = click;
+    }
+	
+	public void kickButtonClick(bool click)
+    {
+		kickButton = click;
+    }
+	
+	public void jumpButtonClick(bool click)
+    {
+		jumpButton = click;
     }
 }
