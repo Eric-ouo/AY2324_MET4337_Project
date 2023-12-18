@@ -16,7 +16,7 @@ public class BallGoalInteraction : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (other.CompareTag("Bullet"))
+        if (other.CompareTag("Ball"))
         {
             Rigidbody2D ballRigidbody = other.GetComponent<Rigidbody2D>();
             if (ballRigidbody != null)

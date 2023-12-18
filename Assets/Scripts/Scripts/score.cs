@@ -20,7 +20,7 @@ public class score : MonoBehaviour
     }
     void UpdateScore()
     {
-        leftScoreUI.text = scoreManager.leftscore.ToString();
-        rightScoreUI.text = scoreManager.rightscore.ToString();
+        leftScoreUI.text = scoreManager.leftScore.ToString();
+        rightScoreUI.text = scoreManager.rightScore.ToString();
     }
 }
