@@ -5,16 +5,22 @@ using TMPro;
 
 public class score : MonoBehaviour
 {
-    public int playerScore;
-	[SerializeField] TextMeshProUGUI scoreUI;
-	
+    public ScoreManager scoreManager;
+    [SerializeField] TextMeshProUGUI leftScoreUI;
+    [SerializeField] TextMeshProUGUI rightScoreUI;
+
     void Start()
     {
-        
+        UpdateScore();
     }
 
     void Update()
     {
-        scoreUI.text = playerScore.ToString();
+        UpdateScore();
+    }
+    void UpdateScore()
+    {
+        leftScoreUI.text = scoreManager.leftscore.ToString();
+        rightScoreUI.text = scoreManager.rightscore.ToString();
     }
 }

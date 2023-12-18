@@ -6,6 +6,12 @@ public class BallGoalInteraction : MonoBehaviour
 {
 
     public float dragIncrease = 10f;
+    private ScoreManager scoreManager;
+
+    private void Start()
+    {
+        scoreManager = FindObjectOfType<ScoreManager>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -16,6 +22,16 @@ public class BallGoalInteraction : MonoBehaviour
             if (ballRigidbody != null)
             {
                 ballRigidbody.drag += dragIncrease;
+            }
+            if (transform.position.x < 0f)
+            {
+                Debug.Log("right");
+                scoreManager.IncreaseRightScore();
+            }
+            else if (transform.position.x > 0f)
+            {
+                Debug.Log("Left");
+                scoreManager.IncreaseLeftScore();
             }
         }
     }
