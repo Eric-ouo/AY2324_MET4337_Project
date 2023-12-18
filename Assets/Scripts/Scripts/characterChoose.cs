@@ -14,13 +14,13 @@ public class characterChoose : MonoBehaviour
         switch (chooseCharacter)
 		{
 			case 0:
-				Instantiate(character1, new Vector3(-5f, -2f, 0), Quaternion.identity);
+				character1.SetActive(true);
 				break;
 			case 1:
-				Instantiate(character2, new Vector3(-5f, -2f, 0), Quaternion.identity);
+				character2.SetActive(true);
 				break;
 			case 2:
-				Instantiate(character3, new Vector3(-5f, -2f, 0), Quaternion.identity);
+				character3.SetActive(true);
 				break;
 			default:
 				Debug.Log("character summon error");
