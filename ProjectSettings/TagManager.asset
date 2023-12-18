@@ -5,9 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - Bullet
   - goal
   - PlayerFoot
+  - Ball
+  - ballStartPosition
   layers:
   - Default
   - TransparentFX

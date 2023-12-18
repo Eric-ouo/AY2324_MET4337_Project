@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
@@ -7,28 +5,26 @@ public class ScoreManager : MonoBehaviour
     public int leftScore = 0;
     public int rightScore = 0;
 
-    // Start positions for ball and players
-    public Transform leftPlayerStartPosition;
-    public Transform rightPlayerStartPosition;
-    public Transform ballStartPosition; 
-    
-    // References to the player and ball GameObjects
+    // References to the player GameObjects
     public GameObject leftPlayer;
     public GameObject rightPlayer;
-    [SerializeField] private GameObject ball; 
+
+    // Reference to the ball GameObject
+    [SerializeField] private GameObject ball;
+
+    // Private variables to store the new start positions
+    private Vector3 leftPlayerNewStartPosition = new Vector3(-6.63000011f, 4.23999977f, 0.0444346517f);
+    private Vector3 rightPlayerNewStartPosition = new Vector3(3.52999997f, 4.3499999f, 0.0444346517f);
 
     private void Start()
     {
-        // Ensure that ballStartPosition and ball are set
-        if (ballStartPosition == null)
-        {
-            Debug.LogError("Ball Start Position is not set in the inspector!");
-        }
-
         if (ball == null)
         {
             Debug.LogError("Ball is not set in the inspector!");
         }
+
+        // Reset players and ball to their start positions
+        ResetMatch();
     }
 
     public void IncreaseRightScore()
@@ -51,29 +47,46 @@ public class ScoreManager : MonoBehaviour
 
     private void ResetPlayers()
     {
-        // Ensure the players are not null before trying to reset their positions
-        if (leftPlayer != null && rightPlayer != null)
+        // Reset and move the left player
+        if (leftPlayer != null)
         {
-            leftPlayer.transform.position = leftPlayerStartPosition.position;
-            rightPlayer.transform.position = rightPlayerStartPosition.position;
+            leftPlayer.transform.position = Vector3.zero; // Reset position to zero first
+            leftPlayer.transform.position = leftPlayerNewStartPosition; // Then set to new start position
+            Debug.Log("Left player has been moved to the start position: " + leftPlayerNewStartPosition);
         }
         else
         {
-            Debug.LogError("One or both player GameObjects are missing.");
+            Debug.LogError("Left player is not found in the scene.");
+        }
+
+        // Reset and move the right player
+        if (rightPlayer != null)
+        {
+            rightPlayer.transform.position = Vector3.zero; // Reset position to zero first
+            rightPlayer.transform.position = rightPlayerNewStartPosition; // Then set to new start position
+            Debug.Log("Right player has been moved to the start position: " + rightPlayerNewStartPosition);
+        }
+        else
+        {
+            Debug.LogError("Right player is not found in the scene.");
         }
     }
 
     private void ResetBall()
     {
-        if (ball != null && ballStartPosition != null)
+        if (ball != null)
         {
-            ball.transform.position = ballStartPosition.position;
+
+            ball.transform.position = Vector3.zero;
 
             Rigidbody2D ballRigidbody = ball.GetComponent<Rigidbody2D>();
             if (ballRigidbody != null)
             {
+   
                 ballRigidbody.velocity = Vector2.zero;
                 ballRigidbody.angularVelocity = 0;
+
+                ballRigidbody.drag = 0.1f;
             }
             else
             {
@@ -82,23 +95,7 @@ public class ScoreManager : MonoBehaviour
         }
         else
         {
-            if (ball == null)
-            {
-                Debug.LogError("Ball GameObject is null. Cannot reset ball position.");
-            }
-            if (ballStartPosition == null)
-            {
-                Debug.LogError("Ball start position is null. Cannot reset ball position.");
-            }
+            Debug.LogError("Ball GameObject is null. Cannot reset ball position.");
         }
-          GameObject player = GameObject.FindWithTag("Player"); // Make sure your player has the tag "Player"
-    if (player != null)
-    {
-        PlayerController playerController = player.GetComponent<PlayerController>();
-        if (playerController != null)
-        {
-            playerController.RespawnAfterGoal();
-        }
-    }
     }
 }
