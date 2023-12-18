@@ -23,4 +23,5 @@ public class score : MonoBehaviour
         leftScoreUI.text = scoreManager.leftScore.ToString();
         rightScoreUI.text = scoreManager.rightScore.ToString();
     }
+
 }
