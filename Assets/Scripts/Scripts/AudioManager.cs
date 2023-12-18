@@ -11,8 +11,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip City;
     public AudioClip Grass;
     public AudioClip ButtonClick;
-    public AudioClip RunCity;
-    public AudioClip RunGrass;
+    public AudioClip win;
 
     public AudioSource backgroundMusicSource;
     public AudioSource soundEffectsSource;
@@ -113,17 +112,9 @@ public class AudioManager : MonoBehaviour
         soundEffectsSource.clip = ButtonClick;
         soundEffectsSource.Play();
     }
-    public void PlayRunning(Scene scene, LoadSceneMode mode)
+    public void PlayWin()
     {
-        if(scene.name == "City")
-        {
-            soundEffectsSource.clip = RunCity;
-            soundEffectsSource.Play();
-        }
-        else if(scene.name == "Court")
-        {
-            soundEffectsSource.clip = RunGrass;
-            soundEffectsSource.Play();
-        }
+        soundEffectsSource.clip = win;
+        soundEffectsSource.Play();
     }
 }

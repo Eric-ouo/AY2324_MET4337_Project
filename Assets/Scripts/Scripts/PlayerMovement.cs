@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerMovement : MonoBehaviour
@@ -18,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector3 velocity = Vector3.zero;
     private Animator animator;
+    public AudioSource audioSource;
 
     public LayerMask ballLayer; 
     public float kickRadius; 
@@ -27,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -48,15 +51,18 @@ public class PlayerMovement : MonoBehaviour
         {
             horizontalMove = -speed;
             Reflect(1f);
+            audioPlay();
         }
         else if (Input.GetKey(KeyCode.D))
         {
             horizontalMove = speed;
             Reflect(-1f);
+            audioPlay();
         }
         else
         {
             horizontalMove = 0;
+            audioPlay();
         }
 
             if (Input.GetKey(KeyCode.J))
@@ -73,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
             Collider2D ball = Physics2D.OverlapCircle(transform.position, kickRadius, ballLayer);
             if (ball != null)
             {
+                AudioManager.instance.PlayKickSound();
                 // calculate the direction of the kick
                 Vector2 kickDirection = ball.transform.position - transform.position;
                 kickDirection.Normalize();
@@ -105,5 +112,19 @@ public class PlayerMovement : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.x = Mathf.Abs(scale.x) * direction;
         transform.localScale = scale;
+    }
+    void audioPlay()
+    {
+        if (Mathf.Abs(horizontalMove) > 0f)
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+        }
+        else
+        {
+            audioSource.Stop();
+        }
     }
 }
