@@ -258,6 +258,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: PlayerFoot
       objectReference: {fileID: 0}
+    - target: {fileID: 4694093897463709897, guid: b2acb355755005347aa831ea3970266b,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4733736713888648512, guid: b2acb355755005347aa831ea3970266b,
         type: 3}
       propertyPath: m_Layer
@@ -404,6 +409,11 @@ PrefabInstance:
       propertyPath: groundCheck
       value: 
       objectReference: {fileID: 1395277057}
+    - target: {fileID: 7091664400495144420, guid: 1895834f2588b8f4e88149013d5822c6,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7970658314633941966, guid: 1895834f2588b8f4e88149013d5822c6,
         type: 3}
       propertyPath: sceneId
@@ -2440,6 +2450,11 @@ PrefabInstance:
     - target: {fileID: 3697109234059869015, guid: 872977c347ff593449dd7cb739d85241,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5207585478717887077, guid: 872977c347ff593449dd7cb739d85241,
+        type: 3}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

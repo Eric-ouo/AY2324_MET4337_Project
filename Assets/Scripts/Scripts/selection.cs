@@ -10,15 +10,18 @@ public class selection : MonoBehaviour
 	
 	[SerializeField] private int character;
 	[SerializeField] private int map;
-	
-	void Start()
+    AudioManager audioManager = AudioManager.instance;
+
+    void Start()
 	{
 		anim = canvas.GetComponent<Animator>();
 	}
 	
 	public void back()
 	{
-		if (anim.GetBool("map"))
+		audioManager.PlayButtonClick();
+
+        if (anim.GetBool("map"))
 		{
 			anim.SetBool("map", false);
 		}
@@ -30,13 +33,15 @@ public class selection : MonoBehaviour
 	
 	public void chooseCharacter(int i)
 	{
-		character = i;
+        audioManager.PlayButtonClick();
+        character = i;
 		anim.SetBool("map", true);
 	}
 	
 	public void chooseMap(int i)
 	{
-		map = i;
+        audioManager.PlayButtonClick();
+        map = i;
 		playerSerrings.characterSelect = character;
 		playerSerrings.mapSelect = map;
 		

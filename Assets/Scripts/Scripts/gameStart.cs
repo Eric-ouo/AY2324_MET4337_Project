@@ -11,6 +11,7 @@ public class gameStart : MonoBehaviour
 	
 	[SerializeField] private Slider slider;
 	[SerializeField] private int soundValue;
+	public AudioManager audioManager;
 	
 	void Start()
 	{
@@ -21,25 +22,31 @@ public class gameStart : MonoBehaviour
 	{
 		soundValue = (int)slider.value;
 		playerSerrings.soundValue = soundValue;
-	}
+        audioManager.backgroundMusicSource.volume = (float)soundValue / 10;
+        audioManager.soundEffectsSource.volume = (float)soundValue / 10;
+    }
 	
 	public void start_game()
 	{
-		SceneManager.LoadScene(1);
+        audioManager.PlayButtonClick();
+        SceneManager.LoadScene(1);
 	}
 	
 	public void entry_settings()
 	{
-		anim.SetBool("settings", true);
+        audioManager.PlayButtonClick();
+        anim.SetBool("settings", true);
     }
 	
 	public void exit_settings()
 	{
-		anim.SetBool("settings", false);
+        audioManager.PlayButtonClick();
+        anim.SetBool("settings", false);
     }
 	
 	public void quit()
 	{
-		Application.Quit();
+        audioManager.PlayButtonClick();
+        Application.Quit();
     }
 }

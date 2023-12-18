@@ -14,9 +14,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip RunCity;
     public AudioClip RunGrass;
 
-    private AudioSource backgroundMusicSource;
-    private AudioSource soundEffectsSource;
-    private static AudioManager instance;
+    public AudioSource backgroundMusicSource;
+    public AudioSource soundEffectsSource;
+    public static AudioManager instance;
 
     void Awake()
     {
@@ -34,9 +34,6 @@ public class AudioManager : MonoBehaviour
     {
         backgroundMusicSource = gameObject.AddComponent<AudioSource>();
         soundEffectsSource = gameObject.AddComponent<AudioSource>();
-        backgroundMusicSource.volume = 0.1f;
-        soundEffectsSource.volume = 0.1f;
-
         PlayBackgroundMusic();
     }
 

@@ -1082,6 +1082,8 @@ MonoBehaviour:
   ButtonClick: {fileID: 8300000, guid: 28bb7188fe53e344d8dc4c42999cb0a8, type: 3}
   RunCity: {fileID: 8300000, guid: be5eeda1ada5e9848973605ed02c13da, type: 3}
   RunGrass: {fileID: 8300000, guid: e2842216f409a1c4d969816c8f65383f, type: 3}
+  backgroundMusicSource: {fileID: 0}
+  soundEffectsSource: {fileID: 0}
 --- !u!4 &511357997
 Transform:
   m_ObjectHideFlags: 0
@@ -1109,7 +1111,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.01
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1738,6 +1740,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   slider: {fileID: 1707237637}
   soundValue: 0
+  audioManager: {fileID: 511357996}
 --- !u!4 &1470591499
 Transform:
   m_ObjectHideFlags: 0
@@ -1947,7 +1950,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 10
   m_WholeNumbers: 1
-  m_Value: 5
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

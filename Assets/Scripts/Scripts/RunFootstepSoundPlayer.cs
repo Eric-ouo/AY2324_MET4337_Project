@@ -19,6 +19,7 @@ public class RunFootstepSoundPlayer : MonoBehaviour
 
     private void Start()
     {
+        enabled = false;
         // Get the AudioSource and Animator components attached to the GameObject.
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();

@@ -22,17 +22,19 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector3 velocity = Vector3.zero;
     private Animator animator;
+    public AudioSource audioSource;
 
     public LayerMask ballLayer; // used to detect the ball layermask
     public float kickRadius; // where the kick will be detected
     public float kickForce; // force of the kick
 
-    //public AudioManager audioManager;
+    AudioManager audioManager = AudioManager.instance;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -64,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
         {
             horizontalMove = 0;
         }
+        audioSource.volume = 1f;
+        audioPlay();
 
         if (Input.GetKey(KeyCode.J) || kickButton)
         {
@@ -79,14 +83,13 @@ public class PlayerMovement : MonoBehaviour
             Collider2D ball = Physics2D.OverlapCircle(transform.position, kickRadius, ballLayer);
             if (ball != null)
             {
+                audioManager.PlayKickSound();
                 // calculate the direction of the kick
                 Vector2 kickDirection = ball.transform.position - transform.position;
                 kickDirection.Normalize();
 
                 // to kick the ball, we need to add force to the ball
                 ball.GetComponent<Rigidbody2D>().AddForce(kickDirection * kickForce, ForceMode2D.Impulse);
-
-                //audioManager.PlayKickGround();
             }
         }
     }
@@ -136,4 +139,18 @@ public class PlayerMovement : MonoBehaviour
 	{
 		kickButton = press;
 	}
+    void audioPlay()
+    {
+        if (Mathf.Abs(horizontalMove) > 0f)
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+        }
+        else
+        {
+            audioSource.Stop();
+        }
+    }
 }
