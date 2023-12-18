@@ -8,18 +8,16 @@ public class CountdownTimer : MonoBehaviour
     public int countdownTime = 60; // Countdown from 60 seconds
     public Text countdownDisplay; // Reference to UI Text element
     public GameObject losePanel; // Reference to the Lose panel
-    public GameObject pause; // Reference to the Pause panel
     
     private void Start()
     {
-        if (countdownDisplay == null || losePanel == null || pause == null)
+        if (countdownDisplay == null || losePanel == null)
         {
             Debug.LogError("UI references not set on CountdownTimer script.");
             return;
         }
 
         losePanel.SetActive(false); // Ensure the lose panel is hidden at the start
-        pause.SetActive(false); // Ensure the pause panel is hidden at the start
 
         StartCoroutine(CountdownToStart());
     }
@@ -47,13 +45,24 @@ public class CountdownTimer : MonoBehaviour
     IEnumerator ShowPausePanelAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Time.timeScale = 0; // Pause the game
-        pause.SetActive(true); // Show the pause panel
+        Time.timeScale = 0f; // Pause the game
     }
 
     public void ExitGame() 
     {
-        Time.timeScale = 1; 
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu"); 
     }
+	
+	public void pauseButtonClick(bool click)
+	{
+		if (click)
+		{
+			Time.timeScale = 0f;
+		}
+		else
+		{
+			Time.timeScale = 1f;
+		}
+	}
 }
