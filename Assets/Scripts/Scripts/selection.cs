@@ -50,6 +50,7 @@ public class selection : MonoBehaviour
 		switch (playerSerrings.mapSelect)
 		{
 			case 0:
+				characterChoose.chooseCharacter = character;
 				SceneManager.LoadScene(2);
 				break;
 			case 1:

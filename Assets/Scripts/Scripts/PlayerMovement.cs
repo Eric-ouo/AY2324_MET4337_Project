@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+		groundCheck = GameObject.Find("GroundBlock").transform;
     }
 
     private void Update()
