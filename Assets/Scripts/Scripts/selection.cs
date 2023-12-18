@@ -54,6 +54,7 @@ public class selection : MonoBehaviour
 				SceneManager.LoadScene(2);
 				break;
 			case 1:
+				characterChoosePVP.chooseCharacter = character;
 				SceneManager.LoadScene(3);
 				break;
 			default:
