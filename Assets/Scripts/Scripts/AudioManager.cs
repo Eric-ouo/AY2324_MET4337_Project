@@ -12,6 +12,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip Grass;
     public AudioClip ButtonClick;
     public AudioClip win;
+    public AudioClip run;
+    public bool isRun;
 
     public AudioSource backgroundMusicSource;
     public AudioSource soundEffectsSource;
@@ -116,5 +118,20 @@ public class AudioManager : MonoBehaviour
     {
         soundEffectsSource.clip = win;
         soundEffectsSource.Play();
+    }
+    public void audioPlay()
+    {
+        if(isRun == true);
+    {
+            if (!soundEffectsSource.isPlaying)
+            {
+                soundEffectsSource.clip = run;
+                soundEffectsSource.Play();
+            }
+            else if(isRun == false)
+            {
+                soundEffectsSource.Stop();
+            }
+        }
     }
 }

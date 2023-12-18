@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class PlayerMovement : MonoBehaviour
@@ -19,17 +20,14 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector3 velocity = Vector3.zero;
     private Animator animator;
-    public AudioSource audioSource;
-
     public LayerMask ballLayer; 
     public float kickRadius; 
-    public float kickForce; 
+    public float kickForce;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -41,34 +39,38 @@ public class PlayerMovement : MonoBehaviour
                 hasJumped = false; // character is grounded, allow to jump
             }
 
-        if (!hasJumped && isGrounded && Input.GetKeyDown(KeyCode.Space))
+        if (!hasJumped && isGrounded && (Input.GetKeyDown(KeyCode.Space)))
         {
             isJumping = true;
-            hasJumped = true; // after jump, set to true, not allow to jump again
+            hasJumped = true;
         }
 
         if (Input.GetKey(KeyCode.A))
         {
             horizontalMove = -speed;
             Reflect(1f);
-            audioPlay();
+            AudioManager.instance.isRun = true;
+            AudioManager.instance.audioPlay();
         }
         else if (Input.GetKey(KeyCode.D))
         {
             horizontalMove = speed;
             Reflect(-1f);
-            audioPlay();
+            AudioManager.instance.isRun = true;
+            AudioManager.instance.audioPlay();
         }
         else
         {
             horizontalMove = 0;
-            audioPlay();
+            AudioManager.instance.isRun = false;
+            AudioManager.instance.audioPlay();
         }
 
-            if (Input.GetKey(KeyCode.J))
-            {
-                animator.SetTrigger("kick");
-            }
+        if (Input.GetKey(KeyCode.J))
+        {
+            AudioManager.instance.PlayKickSound();
+            animator.SetTrigger("kick");
+        }
 
         animator.SetBool("run", Mathf.Abs(horizontalMove) > 0f);
         animator.SetBool("Jump", isJumping);
@@ -79,7 +81,6 @@ public class PlayerMovement : MonoBehaviour
             Collider2D ball = Physics2D.OverlapCircle(transform.position, kickRadius, ballLayer);
             if (ball != null)
             {
-                AudioManager.instance.PlayKickSound();
                 // calculate the direction of the kick
                 Vector2 kickDirection = ball.transform.position - transform.position;
                 kickDirection.Normalize();
@@ -112,19 +113,5 @@ public class PlayerMovement : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.x = Mathf.Abs(scale.x) * direction;
         transform.localScale = scale;
-    }
-    void audioPlay()
-    {
-        if (Mathf.Abs(horizontalMove) > 0f)
-        {
-            if (!audioSource.isPlaying)
-            {
-                audioSource.Play();
-            }
-        }
-        else
-        {
-            audioSource.Stop();
-        }
     }
 }

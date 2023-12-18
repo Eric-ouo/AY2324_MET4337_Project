@@ -1832,7 +1832,7 @@ GameObject:
   - component: {fileID: 700153875}
   - component: {fileID: 700153876}
   - component: {fileID: 700153877}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: GroundBlock
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -5024,6 +5024,11 @@ PrefabInstance:
       propertyPath: groundCheck
       value: 
       objectReference: {fileID: 700153875}
+    - target: {fileID: 6269028890547969693, guid: 1895834f2588b8f4e88149013d5822c6,
+        type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
