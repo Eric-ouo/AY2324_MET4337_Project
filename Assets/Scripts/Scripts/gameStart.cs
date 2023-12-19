@@ -24,9 +24,9 @@ public class gameStart : MonoBehaviour
 	{
 		soundValue = (int)slider.value;
 		playerSerrings.soundValue = soundValue;
-        audioManager.backgroundMusicSource.volume = (float)soundValue / 10;
-        audioManager.soundEffectsSource.volume = (float)soundValue / 5;
-		audioManager.winSource.volume = (float)soundValue / 5;
+        audioManager.backgroundMusicSource.volume = (float)soundValue / 15;
+        audioManager.soundEffectsSource.volume = (float)soundValue / 10;
+		audioManager.winSource.volume = (float)soundValue / 10;
     }
 	
 	public void start_game()
