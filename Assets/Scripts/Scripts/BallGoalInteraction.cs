@@ -7,10 +7,12 @@ public class BallGoalInteraction : MonoBehaviour
 
     public float dragIncrease = 10f;
     private ScoreManager scoreManager;
+    public AudioManager audioManager;
 
     private void Start()
     {
         scoreManager = FindObjectOfType<ScoreManager>();
+        audioManager = AudioManager.instance;//
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -27,11 +29,13 @@ public class BallGoalInteraction : MonoBehaviour
             {
                 Debug.Log("right");
                 scoreManager.IncreaseRightScore();
+                audioManager.PlayWin();//
             }
             else if (transform.position.x > 0f)
             {
                 Debug.Log("Left");
                 scoreManager.IncreaseLeftScore();
+                audioManager.PlayWin();//
             }
         }
     }

@@ -17,6 +17,7 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource backgroundMusicSource;
     public AudioSource soundEffectsSource;
+    public AudioSource runSoundSource;
     public static AudioManager instance;
 
     void Awake()
@@ -35,6 +36,7 @@ public class AudioManager : MonoBehaviour
     {
         backgroundMusicSource = gameObject.AddComponent<AudioSource>();
         soundEffectsSource = gameObject.AddComponent<AudioSource>();
+        runSoundSource = gameObject.AddComponent<AudioSource>();
         PlayBackgroundMusic();
     }
 
@@ -123,14 +125,14 @@ public class AudioManager : MonoBehaviour
     {
         if(isRun == true);
     {
-            if (!soundEffectsSource.isPlaying)
+            if (!runSoundSource.isPlaying)
             {
-                soundEffectsSource.clip = run;
-                soundEffectsSource.Play();
+                runSoundSource.clip = run;
+                runSoundSource.Play();
             }
             else if(isRun == false)
             {
-                soundEffectsSource.Stop();
+                runSoundSource.Stop();
             }
         }
     }

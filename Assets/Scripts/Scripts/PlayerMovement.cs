@@ -33,10 +33,13 @@ public class PlayerMovement : MonoBehaviour
     public float kickRadius;
     public float kickForce;
 
+    public AudioManager audioManager; //
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        audioManager = AudioManager.instance;//
     }
 
     private void Update()
@@ -58,15 +61,21 @@ public class PlayerMovement : MonoBehaviour
         {
             horizontalMove = -speed;
             Reflect(1f);
+            audioManager.isRun = true;//
+            audioManager.audioPlay();//
         }
         else if (Input.GetKey(KeyCode.D))
         {
             horizontalMove = speed;
             Reflect(-1f);
+            audioManager.isRun = true;//
+            audioManager.audioPlay();//
         }
         else
         {
             horizontalMove = 0;
+            audioManager.isRun = false;//
+            audioManager.audioPlay();//
         }
 
         if (Input.GetKey(KeyCode.J))
@@ -83,6 +92,7 @@ public class PlayerMovement : MonoBehaviour
             Collider2D ball = Physics2D.OverlapCircle(transform.position, kickRadius, ballLayer);
             if (ball != null)
             {
+                audioManager.PlayKickSound();//
                 // calculate the direction of the kick
                 Vector2 kickDirection = ball.transform.position - transform.position;
                 kickDirection.Normalize();

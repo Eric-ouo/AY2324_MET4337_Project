@@ -8,7 +8,13 @@ public class scorePve : MonoBehaviour
 	[SerializeField] private int score;
 	[SerializeField] private TextMeshProUGUI scoreUI;
 	[SerializeField] private GameObject ball;
+	public AudioManager audioManager;//
 	
+	void Start()
+	{
+		audioManager = AudioManager.instance;//
+	}
+
 	void Update()
 	{
 		scoreUI.text = score.ToString();
@@ -18,7 +24,8 @@ public class scorePve : MonoBehaviour
     {
 		if (other.CompareTag("Bullet"))
         {
-			Destroy(other.gameObject);
+			audioManager.PlayWin();//
+            Destroy(other.gameObject);
 			Instantiate(ball, new Vector3(0f, -0.42f, 0f), Quaternion.identity);
             score++;
         }
