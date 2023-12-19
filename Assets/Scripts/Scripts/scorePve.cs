@@ -24,7 +24,7 @@ public class scorePve : MonoBehaviour
     {
 		if (other.CompareTag("Bullet"))
         {
-			audioManager.PlayWin();//
+			audioManager.PlayWater();//
             Destroy(other.gameObject);
 			Instantiate(ball, new Vector3(0f, -0.42f, 0f), Quaternion.identity);
             score++;

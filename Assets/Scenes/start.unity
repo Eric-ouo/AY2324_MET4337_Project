@@ -1082,10 +1082,12 @@ MonoBehaviour:
   ButtonClick: {fileID: 8300000, guid: 28bb7188fe53e344d8dc4c42999cb0a8, type: 3}
   win: {fileID: 8300000, guid: a6765a1e616b8c442a207bd3862a2438, type: 3}
   run: {fileID: 8300000, guid: be5eeda1ada5e9848973605ed02c13da, type: 3}
+  water: {fileID: 8300000, guid: ecd7a3e024316f0449d17a0ecfe9c84d, type: 3}
   isRun: 0
   backgroundMusicSource: {fileID: 0}
   soundEffectsSource: {fileID: 0}
   runSoundSource: {fileID: 0}
+  winSource: {fileID: 0}
 --- !u!4 &511357997
 Transform:
   m_ObjectHideFlags: 0

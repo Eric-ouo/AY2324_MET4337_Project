@@ -13,11 +13,13 @@ public class AudioManager : MonoBehaviour
     public AudioClip ButtonClick;
     public AudioClip win;
     public AudioClip run;
+    public AudioClip water;
     public bool isRun;
 
     public AudioSource backgroundMusicSource;
     public AudioSource soundEffectsSource;
     public AudioSource runSoundSource;
+    public AudioSource winSource;
     public static AudioManager instance;
 
     void Awake()
@@ -37,6 +39,7 @@ public class AudioManager : MonoBehaviour
         backgroundMusicSource = gameObject.AddComponent<AudioSource>();
         soundEffectsSource = gameObject.AddComponent<AudioSource>();
         runSoundSource = gameObject.AddComponent<AudioSource>();
+        winSource = gameObject.AddComponent<AudioSource>();
         PlayBackgroundMusic();
     }
 
@@ -118,8 +121,13 @@ public class AudioManager : MonoBehaviour
     }
     public void PlayWin()
     {
-        soundEffectsSource.clip = win;
-        soundEffectsSource.Play();
+        winSource.clip = win;
+        winSource.Play();
+    }
+    public void PlayWater()
+    {
+        winSource.clip = water;
+        winSource.Play();
     }
     public void audioPlay()
     {
