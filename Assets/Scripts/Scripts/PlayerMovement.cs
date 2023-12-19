@@ -53,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (!hasJumped && isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
+            audioManager.PlayJump();
             isJumping = true;
             hasJumped = true; // after jump, set to true, not allow to jump again
         }
@@ -132,12 +133,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (tapCountA == 2)
         {
+            audioManager.PlayDash();
             Dash(-1); // Dash left
             tapCountA = 0; // Reset tap count after a dash has been initiated
         }
 
         if (tapCountD == 2)
         {
+            audioManager.PlayDash();
             Dash(1); // Dash right
             tapCountD = 0; // Reset tap count after a dash has been initiated
         }

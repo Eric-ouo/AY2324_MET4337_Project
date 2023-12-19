@@ -14,6 +14,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip win;
     public AudioClip run;
     public AudioClip water;
+    public AudioClip dash;
+    public AudioClip jump;
     public bool isRun;
 
     public AudioSource backgroundMusicSource;
@@ -128,6 +130,16 @@ public class AudioManager : MonoBehaviour
     {
         winSource.clip = water;
         winSource.Play();
+    }
+    public void PlayDash()
+    {
+        soundEffectsSource.clip = dash;
+        soundEffectsSource.Play();
+    }
+    public void PlayJump()
+    {
+        soundEffectsSource.clip = jump;
+        soundEffectsSource.Play();
     }
     public void audioPlay()
     {
