@@ -309,7 +309,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &290100545
 RectTransform:
   m_ObjectHideFlags: 0
@@ -412,14 +412,9 @@ MonoBehaviour:
   ButtonClick: {fileID: 8300000, guid: 0e78333318be51142ae7bcad08fa5a2d, type: 3}
   win: {fileID: 0}
   run: {fileID: 0}
-  water: {fileID: 0}
-  dash: {fileID: 0}
-  jump: {fileID: 0}
   isRun: 0
   backgroundMusicSource: {fileID: 0}
   soundEffectsSource: {fileID: 0}
-  runSoundSource: {fileID: 0}
-  winSource: {fileID: 0}
 --- !u!82 &301227419
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1092,10 +1087,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 1
+  m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1354,8 +1349,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c61a86e2553cac44c8c8f1d5f2bb1e27, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: f8813036611eb984ab1a0d66ccdbc704, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1389,7 +1384,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1634761498
 RectTransform:
   m_ObjectHideFlags: 0

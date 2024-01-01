@@ -50,10 +50,12 @@ public class selection : MonoBehaviour
 		switch (playerSerrings.mapSelect)
 		{
 			case 0:
-			case 1:
 				characterChoose.chooseCharacter = character;
-				characterChoose.chooseMap = map;
 				SceneManager.LoadScene(2);
+				break;
+			case 1:
+				characterChoosePVP.chooseCharacter = character;
+				SceneManager.LoadScene(3);
 				break;
 			default:
 				Debug.Log("map select error");

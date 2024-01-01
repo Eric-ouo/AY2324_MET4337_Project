@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 
 
-public class PlayerMovement : NetworkBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     public float speed = 10f;
     public float jumpForce = 5f;
@@ -33,11 +32,6 @@ public class PlayerMovement : NetworkBehaviour
     public LayerMask ballLayer;
     public float kickRadius;
     public float kickForce;
-	
-	private bool leftButton;
-	private bool rightButton;
-	private bool kickButton;
-	private bool jumpButton;
 
     public AudioManager audioManager; //
 
@@ -50,13 +44,6 @@ public class PlayerMovement : NetworkBehaviour
 
     private void Update()
     {
-		/*
-		if (!isLocalPlayer)
-		{
-			return;
-		}
-		*/
-		
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
 
         if (isGrounded)
@@ -64,21 +51,21 @@ public class PlayerMovement : NetworkBehaviour
             hasJumped = false; // character is grounded, allow to jump
         }
 
-        if (!hasJumped && isGrounded && (Input.GetKeyDown(KeyCode.Space) || jumpButton))
+        if (!hasJumped && isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             audioManager.PlayJump();
             isJumping = true;
             hasJumped = true; // after jump, set to true, not allow to jump again
         }
 
-        if (Input.GetKey(KeyCode.A) || leftButton)
+        if (Input.GetKey(KeyCode.A))
         {
             horizontalMove = -speed;
             Reflect(1f);
             audioManager.isRun = true;//
             audioManager.audioPlay();//
         }
-        else if (Input.GetKey(KeyCode.D) || rightButton)
+        else if (Input.GetKey(KeyCode.D))
         {
             horizontalMove = speed;
             Reflect(-1f);
@@ -92,7 +79,7 @@ public class PlayerMovement : NetworkBehaviour
             audioManager.audioPlay();//
         }
 
-        if (Input.GetKey(KeyCode.J) || kickButton)
+        if (Input.GetKey(KeyCode.J))
         {
             animator.SetTrigger("kick");
         }
@@ -100,7 +87,7 @@ public class PlayerMovement : NetworkBehaviour
         animator.SetBool("run", Mathf.Abs(horizontalMove) > 0f);
         animator.SetBool("Jump", isJumping);
 
-        if (Input.GetKeyDown(KeyCode.J) || kickButton)
+        if (Input.GetKeyDown(KeyCode.J))
         {
             // check if the ball is in range
             Collider2D ball = Physics2D.OverlapCircle(transform.position, kickRadius, ballLayer);
@@ -207,24 +194,4 @@ public class PlayerMovement : NetworkBehaviour
         transform.localScale = scale;
 
     }
-	
-	public void leftButtonClick(bool click)
-    {
-		leftButton = click;
-    }
-	
-	public void rightButtonClick(bool click)
-    {
-		rightButton = click;
-    }
-	
-	public void kickButtonClick(bool click)
-    {
-		kickButton = click;
-    }
-	
-	public void jumpButtonClick(bool click)
-    {
-		jumpButton = click;
-	}
 }
